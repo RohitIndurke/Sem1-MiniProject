@@ -2,7 +2,6 @@
 
 > **Stack:** React + TypeScript (Frontend) · Python/FastAPI (Backend) · PDF Generation
 > **Data Source:** 3 CSV files in `src/assets/` drive all matching and scoring logic
-
 ---
 
 ## 📊 Your CSV Data — What Each File Contains
