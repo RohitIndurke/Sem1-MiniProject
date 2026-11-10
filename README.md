@@ -4,6 +4,7 @@
 > **Data Source:** 3 CSV files in `src/assets/` drive all matching and scoring logic
 ---
 
+
 ## 📊 Your CSV Data — What Each File Contains
 
 | File                                                                                              | Rows    | Purpose in App                                                 |
