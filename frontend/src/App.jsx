@@ -2,9 +2,9 @@ import { CardDemo } from "./component/Card";
 
 export const App = () => {
   return (
-    <div>
+    <main className="flex min-h-screen w-full items-center justify-center p-4">
       <CardDemo />
-    </div>
+    </main>
   );
 };
 
