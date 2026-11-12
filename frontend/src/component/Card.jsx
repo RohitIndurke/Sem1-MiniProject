@@ -1,63 +1,125 @@
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
 export function CardDemo() {
+  const [file, setFile] = useState(null);
+  const [text, setText] = useState("");
+  const [dragging, setDragging] = useState(false);
+  const fileRef = useRef(null);
+
+  const handleFile = (f) => {
+    if (f && f.type === "application/pdf") setFile(f);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setDragging(false);
+    handleFile(e.dataTransfer.files[0]);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!file || !text.trim()) return;
+    // TODO: POST FormData to /api/v1/ats
+    console.log("submit", { file, text });
+  };
+
   return (
-    <Card className="w-full max-w-sm">
+    <Card className="w-full max-w-xl shadow-lg">
       <CardHeader>
-        <CardTitle>Login to your account</CardTitle>
+        <CardTitle className="text-xl">ATS Resume Analyzer</CardTitle>
         <CardDescription>
-          Enter your email below to login to your account
+          Upload your resume (PDF) and paste the job description, then click{" "}
+          <strong>Next</strong>.
         </CardDescription>
-        <CardAction>
-          <Button variant="link">Sign Up</Button>
-        </CardAction>
       </CardHeader>
-      <CardContent>
-        <form>
-          <div className="flex flex-col gap-6">
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="m@example.com"
-                required
-              />
+
+      <form onSubmit={handleSubmit}>
+        <CardContent className="flex flex-col gap-5">
+          {/* PDF Upload */}
+          <div className="grid gap-2">
+            <Label>Resume (PDF)</Label>
+            <div
+              role="button"
+              tabIndex={0}
+              onClick={() => fileRef.current?.click()}
+              onKeyDown={(e) => e.key === "Enter" && fileRef.current?.click()}
+              onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
+              onDragLeave={() => setDragging(false)}
+              onDrop={handleDrop}
+              className={[
+                "flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed px-4 py-8 cursor-pointer transition-colors",
+                dragging
+                  ? "border-primary bg-primary/5"
+                  : "border-border hover:border-primary/50 hover:bg-muted/30",
+              ].join(" ")}
+            >
+              {file ? (
+                <>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="size-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span className="text-sm font-medium text-foreground">{file.name}</span>
+                  <span className="text-xs text-muted-foreground">Click to replace</span>
+                </>
+              ) : (
+                <>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="size-8 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                  </svg>
+                  <span className="text-sm text-muted-foreground">
+                    Drag & drop or <span className="text-primary underline underline-offset-2">browse</span>
+                  </span>
+                  <span className="text-xs text-muted-foreground">PDF only</span>
+                </>
+              )}
             </div>
-            <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
-                <a
-                  href="#"
-                  className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                >
-                  Forgot your password?
-                </a>
-              </div>
-              <Input id="password" type="password" required />
-            </div>
+            <input
+              ref={fileRef}
+              type="file"
+              accept=".pdf,application/pdf"
+              className="hidden"
+              onChange={(e) => handleFile(e.target.files?.[0])}
+            />
           </div>
-        </form>
-      </CardContent>
-      <CardFooter className="flex-col gap-2">
-        <Button type="submit" className="w-full">
-          Login
-        </Button>
-        <Button variant="outline" className="w-full">
-          Login with Google
-        </Button>
-      </CardFooter>
+
+          {/* Job Description */}
+          <div className="grid gap-2">
+            <Label htmlFor="jd">Job Description</Label>
+            <Textarea
+              id="jd"
+              placeholder="Paste the job description or requirements here…"
+              rows={6}
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              required
+            />
+          </div>
+        </CardContent>
+
+        <CardFooter className="justify-end pt-2">
+          <Button
+            type="submit"
+            disabled={!file || !text.trim()}
+            className="gap-2"
+          >
+            Next
+            <svg xmlns="http://www.w3.org/2000/svg" className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Button>
+        </CardFooter>
+      </form>
     </Card>
   );
 }
