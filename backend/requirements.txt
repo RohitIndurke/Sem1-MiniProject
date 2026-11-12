@@ -1,0 +1,12 @@
+
+fastapi
+uvicorn[standard]
+pandas
+pydantic
+python-dotenv
+scikit-learn
+jinja2
+weasyprint
+python-multipart
+pytest
+httpx
