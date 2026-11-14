@@ -3,6 +3,7 @@ fastapi
 uvicorn[standard]
 pandas
 pydantic
+pydantic-settings
 python-dotenv
 scikit-learn
 jinja2
@@ -10,3 +11,5 @@ weasyprint
 python-multipart
 pytest
 httpx
+motor
+pymongo
