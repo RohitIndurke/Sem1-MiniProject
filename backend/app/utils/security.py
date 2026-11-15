@@ -3,7 +3,7 @@ import secrets
 
 def hash_password(password:str)->str:
     salt = secrets.token_bytes(16)
-    key = hashlib.pbkdf2_hmac("sha256",password("utf-8"),salt,100_00)
+    key = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, 100_000)
     return f"{salt.hex()}:{key.hex()}"
 
 def verify_pass(password:str,stored_hash:str)->bool:
