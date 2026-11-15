@@ -80,7 +80,6 @@ export const App = () => {
       setCurrentStep(3); // Advance to Review Info
     } catch (err) {
       console.error("Upload & Analysis error:", err);
-      // Wait remaining time if error was instantaneous
       const elapsed = Date.now() - startTime;
       if (elapsed < MIN_SCAN_TIME) {
         await new Promise((resolve) => setTimeout(resolve, MIN_SCAN_TIME - elapsed));
@@ -110,8 +109,8 @@ export const App = () => {
   return (
     <div className="min-h-screen w-full bg-slate-50 flex flex-col font-sans">
       {/* Top Application Header */}
-      <header className="border-b border-slate-200/80 bg-white sticky top-0 z-50 px-4 sm:px-8 py-3">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
+      <header className="border-b border-slate-200/80 bg-white sticky top-0 z-50 px-6 sm:px-12 py-3.5">
+        <div className="w-full flex items-center justify-between">
           {/* Brand Wordmark */}
           <div className="flex items-center">
             <span className="font-bold text-lg text-slate-900 tracking-tight">
@@ -148,9 +147,9 @@ export const App = () => {
       </header>
 
       {/* Main View Area */}
-      <main className="flex-1 flex flex-col items-center justify-start p-4 sm:p-8">
+      <main className="flex-1 w-full px-6 sm:px-12 py-8 flex flex-col justify-start">
         {!user ? (
-          /* AUTH SCREEN (Image 1) */
+          /* AUTH SCREEN */
           <div className="w-full flex flex-col items-center justify-center pt-8 sm:pt-14 space-y-4">
             <AuthCard onSuccess={(authenticatedUser) => setUser(authenticatedUser)} />
             <button
@@ -162,12 +161,12 @@ export const App = () => {
             </button>
           </div>
         ) : (
-          /* WORKFLOW WIZARD (Images 2, 3, 4) */
-          <div className="w-full max-w-4xl flex flex-col items-center space-y-6">
+          /* WORKFLOW WIZARD (Left-aligned matching reference screenshots) */
+          <div className="w-full max-w-2xl flex flex-col space-y-4">
             {/* Top 4-Step Stepper */}
             <Stepper currentStep={currentStep} />
 
-            {/* Step 1: Target Job (Image 2) */}
+            {/* Step 1: Target Job */}
             {currentStep === 1 && (
               <TargetJobCard
                 jdText={jdText}
@@ -176,7 +175,7 @@ export const App = () => {
               />
             )}
 
-            {/* Step 2: Upload & Analyze (Images 3 & 4) */}
+            {/* Step 2: Upload & Analyze */}
             {currentStep === 2 && (
               <UploadResumeCard
                 onBack={() => setCurrentStep(1)}

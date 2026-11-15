@@ -1,10 +1,10 @@
-import { Check, Plus, ChevronRight, ArrowLeft, Target, Layers } from "lucide-react";
+import { Check, Plus, ChevronRight, Target, Layers } from "lucide-react";
 
 export function ReviewInfoCard({ analysis, filename, onBack, onContinue }) {
   if (!analysis) return null;
 
   return (
-    <div className="w-full max-w-2xl bg-white rounded-2xl shadow-sm border border-slate-200/90 p-6 sm:p-8 transition-all">
+    <div className="w-full max-w-2xl bg-white rounded-2xl shadow-xs border border-slate-200/80 p-7 sm:p-8 transition-all">
       {/* Header */}
       <div className="flex items-center justify-between mb-6 pb-3 border-b border-slate-100">
         <div>
@@ -18,14 +18,14 @@ export function ReviewInfoCard({ analysis, filename, onBack, onContinue }) {
         <button
           type="button"
           onClick={onBack}
-          className="text-xs sm:text-sm font-medium text-slate-500 hover:text-slate-800 flex items-center gap-1 transition-colors cursor-pointer"
+          className="text-xs sm:text-sm font-medium text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
         >
-          <span>← Back</span>
+          ← Back
         </button>
       </div>
 
       {/* Main Score & Metrics Summary */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-200/70 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-5 rounded-2xl bg-slate-50/70 border border-slate-200/70 mb-6">
         {/* Score Ring */}
         <div className="flex flex-col items-center justify-center text-center">
           <div className="size-24 rounded-full border-4 border-blue-600 bg-white flex flex-col items-center justify-center shadow-xs">
@@ -92,7 +92,7 @@ export function ReviewInfoCard({ analysis, filename, onBack, onContinue }) {
               Matching Skills ({analysis.matching_keywords?.length || 0})
             </h4>
           </div>
-          <div className="flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap gap-1.5 max-h-48 overflow-y-auto">
             {analysis.matching_keywords?.map((kw) => (
               <span
                 key={kw}
@@ -112,7 +112,7 @@ export function ReviewInfoCard({ analysis, filename, onBack, onContinue }) {
               Missing Skills ({analysis.missing_keywords?.length || 0})
             </h4>
           </div>
-          <div className="flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap gap-1.5 max-h-48 overflow-y-auto">
             {analysis.missing_keywords?.map((kw) => (
               <span
                 key={kw}
@@ -148,4 +148,3 @@ export function ReviewInfoCard({ analysis, filename, onBack, onContinue }) {
     </div>
   );
 }
-

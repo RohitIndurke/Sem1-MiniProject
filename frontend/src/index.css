@@ -120,11 +120,16 @@
   * {
     @apply border-border outline-ring/50;
   }
-  html {
-    @apply font-sans;
-    zoom: 90%;
+  html,
+  body,
+  #root {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #f8fafc;
+    -webkit-font-smoothing: antialiased;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
   }
 }

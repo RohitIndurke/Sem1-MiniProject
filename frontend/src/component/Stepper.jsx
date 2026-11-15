@@ -9,7 +9,7 @@ export function Stepper({ currentStep }) {
   ];
 
   return (
-    <div className="w-full max-w-4xl mx-auto py-6 px-4">
+    <div className="w-full max-w-2xl pb-6">
       <div className="flex items-center justify-between">
         {steps.map((step, index) => {
           const isCompleted = step.number < currentStep;
@@ -18,9 +18,9 @@ export function Stepper({ currentStep }) {
           return (
             <div key={step.number} className="flex-1 flex items-center">
               {/* Step Icon & Label */}
-              <div className="flex items-center gap-2.5 shrink-0">
+              <div className="flex items-center gap-2 shrink-0">
                 <div
-                  className={`size-7 rounded-full flex items-center justify-center font-bold text-xs transition-all ${
+                  className={`size-6 sm:size-7 rounded-full flex items-center justify-center font-bold text-xs transition-all ${
                     isCompleted
                       ? "bg-blue-600 text-white"
                       : isActive
@@ -44,10 +44,10 @@ export function Stepper({ currentStep }) {
                 </span>
               </div>
 
-              {/* Connecting Line (except after last step) */}
+              {/* Connecting Line */}
               {index < steps.length - 1 && (
                 <div
-                  className={`flex-1 h-[2px] mx-3 sm:mx-6 transition-all ${
+                  className={`flex-1 h-[2px] mx-2 sm:mx-4 transition-all ${
                     isCompleted ? "bg-blue-600" : "bg-slate-200"
                   }`}
                 />
@@ -59,4 +59,3 @@ export function Stepper({ currentStep }) {
     </div>
   );
 }
-

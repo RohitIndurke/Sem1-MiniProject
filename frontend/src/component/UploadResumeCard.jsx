@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { UploadCloud, CheckCircle2, AlertCircle, ArrowLeft, FileText } from "lucide-react";
+import { UploadCloud, AlertCircle, FileText } from "lucide-react";
 
 export function UploadResumeCard({ onBack, onFileUploaded, analyzing, error }) {
   const [file, setFile] = useState(null);
@@ -28,9 +28,9 @@ export function UploadResumeCard({ onBack, onFileUploaded, analyzing, error }) {
   };
 
   return (
-    <div className="w-full max-w-xl bg-white rounded-2xl shadow-sm border border-slate-200/90 p-6 sm:p-8 transition-all">
+    <div className="w-full max-w-2xl bg-white rounded-2xl shadow-xs border border-slate-200/80 p-7 sm:p-8 transition-all">
       {/* Header with Title and ← Back */}
-      <div className="flex items-center justify-between mb-6 pb-2 border-b border-slate-100">
+      <div className="flex items-center justify-between mb-6 pb-2">
         <h2 className="text-xl font-bold text-slate-900 tracking-tight">
           Upload Your Current Resume
         </h2>
@@ -38,18 +38,18 @@ export function UploadResumeCard({ onBack, onFileUploaded, analyzing, error }) {
           type="button"
           onClick={onBack}
           disabled={analyzing}
-          className="text-xs sm:text-sm font-medium text-slate-500 hover:text-slate-800 flex items-center gap-1 transition-colors cursor-pointer disabled:opacity-50"
+          className="text-xs sm:text-sm font-medium text-slate-500 hover:text-slate-800 transition-colors cursor-pointer disabled:opacity-50"
         >
-          <span>← Back</span>
+          ← Back
         </button>
       </div>
 
-      {/* VIEW A: Analyzing Screen (Image 4) */}
+      {/* VIEW A: Analyzing Screen (Image 5) */}
       {analyzing ? (
-        <div className="py-14 sm:py-16 flex flex-col items-center justify-center text-center">
+        <div className="py-16 sm:py-20 flex flex-col items-center justify-center text-center">
           {/* Dual-color circular loader */}
           <div className="relative size-16">
-            <div className="size-16 rounded-full border-4 border-slate-100 border-t-blue-600 border-r-pink-300 animate-spin" />
+            <div className="size-16 rounded-full border-4 border-rose-200/60 border-t-blue-600 border-l-blue-600 animate-spin" />
           </div>
 
           <h3 className="text-lg font-bold text-slate-900 mt-6 tracking-tight">
@@ -60,7 +60,7 @@ export function UploadResumeCard({ onBack, onFileUploaded, analyzing, error }) {
           </p>
         </div>
       ) : (
-        /* VIEW B: Upload Dropzone (Image 3) */
+        /* VIEW B: Upload Dropzone (Image 4) */
         <div>
           <div
             onDragOver={(e) => {
@@ -70,15 +70,15 @@ export function UploadResumeCard({ onBack, onFileUploaded, analyzing, error }) {
             onDragLeave={() => setDragging(false)}
             onDrop={handleDrop}
             onClick={() => fileInputRef.current?.click()}
-            className={`border-2 border-dashed rounded-2xl p-10 sm:p-12 text-center flex flex-col items-center justify-center transition-all cursor-pointer ${
+            className={`border-2 border-dashed rounded-2xl py-12 px-6 text-center flex flex-col items-center justify-center transition-all cursor-pointer ${
               dragging
                 ? "border-blue-500 bg-blue-50/30"
                 : "border-slate-200 hover:border-blue-400 hover:bg-slate-50/50"
             }`}
           >
             {/* Blue circle cloud badge */}
-            <div className="size-14 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mb-3">
-              <UploadCloud className="size-7 stroke-[1.8]" />
+            <div className="size-16 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mb-3.5">
+              <UploadCloud className="size-8 stroke-[1.8]" />
             </div>
 
             <h4 className="text-base font-bold text-slate-900 mb-1">
@@ -95,7 +95,7 @@ export function UploadResumeCard({ onBack, onFileUploaded, analyzing, error }) {
                 e.stopPropagation();
                 fileInputRef.current?.click();
               }}
-              className="px-4 py-2 bg-white border border-slate-200 text-slate-700 font-semibold text-xs rounded-lg hover:bg-slate-50 transition-all shadow-xs cursor-pointer"
+              className="px-5 py-2 bg-white border border-slate-200 text-slate-700 font-semibold text-xs rounded-lg hover:bg-slate-50 transition-all shadow-xs cursor-pointer"
             >
               Browse Files
             </button>
@@ -140,4 +140,3 @@ export function UploadResumeCard({ onBack, onFileUploaded, analyzing, error }) {
     </div>
   );
 }
-
