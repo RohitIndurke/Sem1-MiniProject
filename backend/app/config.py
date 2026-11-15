@@ -27,6 +27,7 @@ class Settings(BaseSettings):
     MONGODB_USERNAME: str | None = None
     MONGODB_PASSWORD: str | None = None
 
+    # Properties for backward compatibility with code using either naming
     @property
     def MONGO_URI(self) -> str:
         return self.MONGODB_URI

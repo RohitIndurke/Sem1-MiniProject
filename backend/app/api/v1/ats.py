@@ -38,7 +38,7 @@ async def analyze_resume(
     # 4. Run ATS analysis algorithm against the Job Description
     analysis = analyze_resume_against_jd(resume_text=resume_text, jd_text=jd)
 
-    # 5. Persist submission and analysis results to MongoDB Atlas (with fallback)
+    # 5. Persist submission and analysis results (with fallback)
     doc = {
         "filename": filename,
         "file_size": len(contents),
