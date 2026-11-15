@@ -1,3 +1,24 @@
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+**/*__pycache__*
+**/__pycache__/**
+backend/**/__pycache__/**
+
+# Virtual Environment
+backend/venv/
+venv/
+ENV/
+env/
+
+# Environment variables & secrets
+*.local
+.env
+.env.local
+.env.*.local
+
 # Logs
 logs
 *.log
@@ -7,23 +28,18 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Node dependencies & builds
 node_modules
 dist
 dist-ssr
-*.local
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store   
+.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-
-*.pyc
-__pycache__/
-backend/venv/
-.env.local
