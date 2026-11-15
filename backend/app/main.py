@@ -5,8 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.data.loder import load_all_data
 from app.data.cache import DATA
 from app.db.database import connect_db, close_db
-
-from app.api.v1 import ats, jobs, candidates, resume
+from app.api.v1 import ats, jobs, candidates, resume, auth
 
 
 @asynccontextmanager
@@ -83,8 +82,12 @@ app.include_router(
     tags=["Resume"]
 )
 
+app.include_router(
+    auth.router,
+    prefix="/api/v1/auth",
+    tags=["Auth"]
+)
 
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("app.main:app", host="127.0.0.1", port=8000, reload=True)
-   

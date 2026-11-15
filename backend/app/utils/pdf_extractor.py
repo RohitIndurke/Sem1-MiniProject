@@ -19,4 +19,3 @@ def extract_text_from_pdf(pdf_bytes: bytes) -> str:
             page_texts.append(text.strip())
 
     return "\n".join(page_texts).strip()
-

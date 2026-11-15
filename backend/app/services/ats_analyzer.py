@@ -19,6 +19,7 @@ def analyze_resume_against_jd(resume_text: str, jd_text: str) -> dict:
             "matching_keywords": [],
             "missing_keywords": [],
             "match_level": "No Content",
+            "status_color": "rose",
             "message": "Resume appears to be empty or unscannable.",
         }
 
@@ -30,6 +31,7 @@ def analyze_resume_against_jd(resume_text: str, jd_text: str) -> dict:
             "matching_keywords": [],
             "missing_keywords": [],
             "match_level": "No Job Description",
+            "status_color": "rose",
             "message": "Job description is empty.",
         }
 
